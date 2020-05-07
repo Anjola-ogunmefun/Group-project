@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 const mongoose = require('./db');
-const entryRoute = require('./entry.js/add-coy')
+const entryRoute = require('./entry/add-coy')
 
 
 const port = 3400;
