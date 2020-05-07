@@ -3,6 +3,7 @@ const CompanyModel = require('../models/company');
 const bodyParser = require('body-parser');
 
 
+
 const port = 3400;
 
 const entryRoute = express.Router();
@@ -23,7 +24,7 @@ entryRoute.post('/add', (req, res) => {
     console.log('new company', input)
 
     if(Object.keys(input).length === 0) {
-        return res.status(400).send('invalid!, field cannot be empty')
+        return res.status(400).send('stop it')
     }
     if(!name){
         return res.send('input company name')
