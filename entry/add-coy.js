@@ -1,7 +1,7 @@
 const express = require('express');
 const CompanyModel = require('../models/company');
 const bodyParser = require('body-parser');
-
+const sendEmail = require('./mail')
 
 
 const port = 3400;
@@ -15,7 +15,7 @@ entryRoute.get('/', (req, res) => {
 });
 
 
-entryRoute.post('/add', (req, res) => {
+entryRoute.post('/add-company', (req, res) => {
 
     const input = req.body;
     const name = input.name;
@@ -24,7 +24,8 @@ entryRoute.post('/add', (req, res) => {
     console.log('new company', input)
 
     if(Object.keys(input).length === 0) {
-        return res.status(400).send('stop it')
+        return res.status(400).send(`We are not here to joke!,  
+                                    Field cannot be empty`)
     }
     if(!name){
         return res.send('input company name')
@@ -42,6 +43,7 @@ entryRoute.post('/add', (req, res) => {
 
     CompanyModel.create(newCompany)
     .then((data) => {
+        sendEmail(email)
         console.log('A new company was added', data)
         return res.status(201).send({
             code: 201,
@@ -55,10 +57,11 @@ entryRoute.post('/add', (req, res) => {
         return res.status(500).send({
             code: 500,
             error: true,
-            message: "Internal server error",
+            message: "Could not save record",
         });
     })
 
+    
 
 })
 
