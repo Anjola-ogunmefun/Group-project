@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const sendEmail = require('./mail')
 
 
-const port = 3400;
+// const port = 3400;
 
 const entryRoute = express.Router();
 
@@ -43,7 +43,7 @@ entryRoute.post('/add-company', (req, res) => {
 
     CompanyModel.create(newCompany)
     .then((data) => {
-        sendEmail(email)
+        sendEmail(email, name)
         console.log('A new company was added', data)
         return res.status(201).send({
             code: 201,
@@ -57,7 +57,7 @@ entryRoute.post('/add-company', (req, res) => {
         return res.status(500).send({
             code: 500,
             error: true,
-            message: "Could not save record",
+            message: "Could not save record!"
         });
     })
 
