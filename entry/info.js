@@ -26,6 +26,7 @@ const state = info.state;
 const address = info.address;
 const description = info.description;
 const department = info.department;
+const phoneNumber = info.phoneNumber;
 
 //logs the entered update to the console
 console.log('company update:', info)
@@ -83,7 +84,8 @@ const update = {
     state,
     address,
     description,
-    department
+    department,
+    phoneNumber
 }
 
 

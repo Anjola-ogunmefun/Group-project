@@ -1,8 +1,9 @@
 const express = require('express');
-const CompanyModel = require('../models/company');
+//const CompanyModel = require('../models/company');
+const {Company} = require("../models/company");
 const bodyParser = require('body-parser');
-const sendEmail = require('./mail')
-
+const sendEmail = require('./mail');
+//const token  = require('./user');
 
 // const port = 3400;
 
@@ -15,17 +16,24 @@ entryRoute.get('/', (req, res) => {
 });
 
 
+
+
 entryRoute.post('/add-company', (req, res) => {
 
     const input = req.body;
     const name = input.name;
     const email = input.email;
+    const token = input.token
 
     console.log('new company', input)
+
+    
+
 
     if(Object.keys(input).length === 0) {
         return res.status(400).send(`We are not here to joke!,  
                                     Field cannot be empty`)
+
     }
     if(!name){
         return res.send('input company name')
@@ -33,17 +41,18 @@ entryRoute.post('/add-company', (req, res) => {
     if(!email){
         return res.send('email is a required field')
     }
-   
-
+  
+        
     const newCompany = {
         name,
-        email
+        email,
+        token
     }
 
 
-    CompanyModel.create(newCompany)
+    Company.create(newCompany)
     .then((data) => {
-        sendEmail(email, name)
+        sendEmail(email, name, token)
         console.log('A new company was added', data)
         return res.status(201).send({
             code: 201,
@@ -59,12 +68,9 @@ entryRoute.post('/add-company', (req, res) => {
             error: true,
             message: "Could not save record!"
         });
-    })
-
-    
+    });
 
 })
-
 
 
 module.exports = entryRoute;

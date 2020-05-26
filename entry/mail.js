@@ -1,9 +1,10 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
+// const userRoute = require('./user');
+// const token = require("./user")
 
 
-
-function sendEmail(email, name){
+function sendEmail(email, name, token){
     
     const mailAccountUser = 'ogunmefunanjola@gmail.com'
     const mailAccountPassword = 'tomilayo'
@@ -26,7 +27,7 @@ function sendEmail(email, name){
         text: `Dear ${name},
                The Portfolio Managing company PMC, would like to invite you onboard our management system as we have been notified of your interest and need for our services.
                We look forward to handling your delicate data with utmost care and discretion. Kindly click on the link below to complete your registration process;
-                https://xd.adobe.com/view/8c98b954-82a5-4c41-5567-9dc30f80e739-faa9/`
+                https://xd.adobe.com/view?token=${token}?email=${email}/`
     }
     
     
@@ -35,7 +36,7 @@ function sendEmail(email, name){
         if(error){
             console.log(error);
         }else{
-            console.log("Message sent: " + response);
+            console.log(`Message sent to ${name}`);
         }
     
         transport.close();
