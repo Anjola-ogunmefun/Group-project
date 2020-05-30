@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 
+const route = require('./route/index');
+
+app.use('/', route)
+
 const nodemailer = require('nodemailer');
 const mongoose = require('./db');
 const entryRoute = require('./entry/add-coy');
