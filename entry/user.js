@@ -28,8 +28,6 @@ userRoute.post("/login", auth, async (req, res) => {
     user = new Company({
       name: req.body.name,
       email: req.body.email
-      
-     
     });
 
     

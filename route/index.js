@@ -1,6 +1,7 @@
 const companyController = require('../controller/index');
 const AuthController = require('../controller/auth');
 const bodyParser = require('body-parser');
+const mongoose = require('../db');
 // const express = require('express');
 
 const route = require('express').Router();
@@ -12,6 +13,10 @@ route.post('/add-company', (req, res) => {
 
 route.post('/login', (req, res) => {
     return new AuthController().login(req, res);
+})
+
+route.post('/update', (req, res) => {
+    return new companyController().updateCompany(req, res)
 })
 
 module.exports = route;

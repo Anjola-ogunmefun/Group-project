@@ -71,12 +71,6 @@ if(country === countryList['']){ // should return selected country
 }
 
 
-
-
-
-
-
-
 const update = {
     sector,
     staffSize,

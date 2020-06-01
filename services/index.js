@@ -7,6 +7,10 @@ class companyServices {
 
     findOne(email){
         return Company.findOne({ email });
+    };
+
+    updateCompany(param){
+        return companyServices.create(param)
     }
 };
 
