@@ -6,9 +6,9 @@ const port = 3400;
 
 const nodemailer = require('nodemailer');
 const mongoose = require('./db');
-const entryRoute = require('./entry/add-coy');
-const infoRoute = require('./entry/info');
-const userRoute = require('./entry/user')
+// const entryRoute = require('./entry/add-coy');
+// const infoRoute = require('./entry/info');
+// const userRoute = require('./entry/user')
 
 
 app.use('/', route)
