@@ -26,7 +26,7 @@ class companyController {
     
         return new companyServices().createCompany(newCompany)
             .then((data) => {
-                sendEmail(email, name, token)
+               sendEmail(email, name, token)
                 console.log('A new company was added', data)
                 return res.status(201).send({
                     code: 201,
@@ -128,6 +128,78 @@ class companyController {
         })
 
 
+    }
+
+    validateToken(req, res){
+        const { email, token } = req.query
+        if(!email || !token){
+            return res.send({
+                error: true,
+                code: 400,
+                message: "token and email must be passed to the query parameter"
+            })
+        }
+        return this.checkIfTokenExpired(email, token, res)
+    }
+
+    async checkIfTokenExpired(email, token, res){
+        const companyRecord = await new companyServices().findOne(email);
+        if(!companyRecord){
+            return res.send({
+                error: true,
+                code: 404,
+                message: "Company not registered"
+            })
+        }
+        if(companyRecord.token !== token){
+            return res.send({
+                error: true,
+                code: 401,
+                message: "Token does not match the required token"
+            })
+        }
+        console.log('companyRecord', companyRecord)
+        const creationTime = companyRecord.createdAt;
+        console.log('creationTime', creationTime);
+        console.log('new date', new Date())
+        console.log('new time', new Date().getTime())
+        console.log('new time floor', Math.floor(new Date().getTime()))
+        let difference = new Date().getTime() - creationTime.getTime() 
+
+        let daysDifference = Math.floor(difference/1000/60/60/24);
+        difference = difference - daysDifference*1000*60*60*24
+        if(daysDifference > 3){
+            companyRecord.status = 'expired';
+            companyRecord.inviteTokenExpired = true
+            companyRecord.save()
+            return res.send({
+                error: true,
+                code: 401,
+                message: "Invite token has expired"
+            })
+        } else {
+            companyRecord.status = 'accepted';
+            companyRecord.save()
+            return res.send({
+                error: true,
+                code: 200,
+                message: "Invite accepted successfully"
+            })
+        }
+        // console.log('days diff', daysDifference)
+        // let hoursDifference = Math.floor(difference/1000/60/60);
+        // difference -= hoursDifference*1000*60*60
+
+        // let minutesDifference = Math.floor(difference/1000/60);
+        // difference = difference - minutesDifference*1000*60
+
+        // let secondsDifference = Math.floor(difference/1000);
+
+        // console.log('difference = ' + 
+        // daysDifference + ' day/s ' + 
+        // hoursDifference + ' hour/s ' + 
+        // minutesDifference + ' minute/s ' + 
+        // secondsDifference + ' second/s ');
     }
 
 

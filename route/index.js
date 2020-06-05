@@ -19,4 +19,8 @@ route.post('/update', (req, res) => {
     return new companyController().updateCompany(req, res)
 })
 
+route.get('/validate', (req, res) => {
+    return new companyController().validateToken(req, res)
+})
+
 module.exports = route;

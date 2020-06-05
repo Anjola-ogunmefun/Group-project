@@ -24,22 +24,28 @@ const CompanySchema = new Schema({
       required: true,
       unique: true
      },
-     expired:{
+     inviteTokenExpired:{
       type: Boolean,
       default: false,
       required: true
      },
-     createdAt:{
-      type: Date,
-      required: true,
-      default: Date.now()
-  },
+     status:{
+      type: String,
+      enum: ['pending', 'invited', 'expired', 'accepted'],
+      default: 'pending',
+      required: true
+     },
+  //    createdAt:{
+  //     type: Date,
+  //     required: true,
+  //     default: Date.now()
+  // },
     //give different access rights if admin or not 
     isAdmin: Boolean
  },
- //{
-//   timestamps: true,
-// }
+ {
+  timestamps: true,
+}
 );
 
  const CompanyModel = mongoose.model('new company', CompanySchema);
