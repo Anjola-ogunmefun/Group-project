@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
     maxlength: 255,
-    unique: true
+    unique: false
   },
   
   //give different access rights if admin or not 
@@ -32,7 +32,7 @@ UserSchema.methods.generateAuthToken = function() {
   const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.get('myprivatekey')); //get the private key from the config file -> environment variable
   return token;
 }
-const User = mongoose.model('user', UserSchema);
+const Resend = mongoose.model('resend', UserSchema);
 
 //function to validate user 
 function validateUser(user) {
@@ -46,7 +46,7 @@ function validateUser(user) {
 }
 
 
-exports.User = User; 
+exports.Resend = Resend; 
 exports.validate = validateUser;
 
 

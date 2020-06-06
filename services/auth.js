@@ -1,4 +1,5 @@
 const {User} = require("../models/user_model");
+const sendEmail = require('../entry/mail');
 class AuthServices {
     login(user){ 
         return user.generateAuthToken();
@@ -9,5 +10,4 @@ class AuthServices {
     }
 
 };
-
 module.exports = AuthServices;

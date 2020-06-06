@@ -27,7 +27,7 @@ function sendEmail(email, name, token){
         text: `Dear ${name},
                The Portfolio Managing company PMC, would like to invite you onboard our management system as we have been notified of your interest and need for our services.
                We look forward to handling your delicate data with utmost care and discretion. Kindly click on the link below to complete your registration process;
-                https://xd.adobe.com/view?token=${token}?email=${email}/`
+                https://xd.adobe.com/view?token=${token}&email=${email}/`
     }
     
     

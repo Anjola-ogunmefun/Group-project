@@ -10,8 +10,8 @@ class companyServices {
     };
 
     updateCompany(param){
-        return companyServices.create(param)
-    }
+        return Company.create(param)
+    };
 };
 
 

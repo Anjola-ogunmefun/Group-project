@@ -23,4 +23,8 @@ route.get('/validate', (req, res) => {
     return new companyController().validateToken(req, res)
 })
 
+route.post('/resendEmail', (req, res) => {
+   return new companyController().resendEmail(req, res)
+})
+
 module.exports = route;

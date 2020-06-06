@@ -31,7 +31,7 @@ const CompanySchema = new Schema({
      },
      status:{
       type: String,
-      enum: ['pending', 'invited', 'expired', 'accepted'],
+      enum: ['pending', 'invited', 'expired', 'active'],
       default: 'pending',
       required: true
      },
@@ -48,7 +48,7 @@ const CompanySchema = new Schema({
 }
 );
 
- const CompanyModel = mongoose.model('new company', CompanySchema);
+ const CompanyModel = mongoose.model('newCompany', CompanySchema);
 
 
 
@@ -70,14 +70,6 @@ const CompanySchema = new Schema({
 
 //   return Joi.validate(user, schema);
 // }
-
-
-//   const time = Date.now()
-//     const timeNow = time - CompanySchema.createdAt
-
-//     if( ` ${Math.floor(timeNow / 1000)} >= 180 ` ){
-//       CompanySchema.expired === true
-//     }
 
 exports.Company = CompanyModel; 
 //exports.validate = validateUser;
